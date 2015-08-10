@@ -19,11 +19,18 @@ module.exports = function(grunt) {
                 files: ['assets/less/**/*.less'], // which files to watch
                 tasks: ['less'],
                 options: {
-                    nospawn: true
+                    livereload: true
                 }
             }
         }
     });
+
+    grunt.event.on('watch', function (action, filepath, target) {
+        grunt.log.writeln(target + ': ' + filepath + ' has ' + action)
+    });
+
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('default', ['less', 'watch']);
 };
